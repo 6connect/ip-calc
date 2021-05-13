@@ -1,0 +1,3 @@
+[submodule "sipcalc"]
+	path = sipcalc
+	url = https://github.com/sii/sipcalc
