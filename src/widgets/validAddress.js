@@ -21,10 +21,6 @@ const Container = styled.div`
 `;
 
 class ValidIPWidget extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         if (!this.props.mode) {
             return <></>
