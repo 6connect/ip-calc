@@ -3,7 +3,7 @@
 ```
 cd sipcalc
 emconfigure ./configure
-emmake make
+emmake make VERBOSE=1 -o output.html -s EXPORTED_RUNTIME_METHODS='["ccall","cwrap"]'
 cd ..
 cp sipcalc/src/sipcalc public/sipcalc.js && cp sipcalc/src/sipcalc.wasm public/sipcalc.wasm
 ```

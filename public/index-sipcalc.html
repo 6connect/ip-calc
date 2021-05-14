@@ -30,6 +30,36 @@
 <body>
   <noscript>You need to enable JavaScript to run this app.</noscript>
   <div id="root"></div>
+
+  <!--<script src="sipcalc.js"></script>
+  <script type="text/javascript">
+    Module.onRuntimeInitialized = async _ => {
+      /*setTimeout(async function () {
+        console.log(Module.run(['-h']))
+        //console.log(Module.asm.main(['string'], ['-h']))
+        console.log(Module)
+      }, 4000)*/
+      /*const api = {
+        version: cwrap('main', 'string', ['-h']),
+        run: cwrap('main', 'string', ['string']),
+      };*/
+
+      console.log(callMain(['-v']));
+      /*Module.console*/
+    };
+  </script>-->
+
+  <script>
+    var importObject = { imports: { main: arg => console.log(arg) } };
+    async function fetchAndInstantiate() {
+      const response = await fetch("/sipcalc.wasm");
+      const buffer = await response.arrayBuffer();
+      const obj = await WebAssembly.instantiate(buffer, importObject);
+      console.log(obj.instance.exports.main());  // "3"
+    }
+    fetchAndInstantiate()
+  </script>
+
   <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.

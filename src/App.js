@@ -1,25 +1,51 @@
-import logo from './logo.svg';
+import dnsController from './dns-controller@3x.png';
 import './App.css';
+import React from 'react';
+import styled from '@emotion/styled';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import ValidIPWidget from './widgets/validAddress';
+
+const Row = styled.div`
+	display: flex;
+	flex-wrap: wrap;
+`;
+
+class App extends React.Component {
+	constructor() {
+		super();
+
+		this.state = {
+			inputValue: "",
+		}
+		this.inputRef = React.createRef();
+	}
+
+	componentDidMount() {
+		this.inputRef.current.addEventListener('keyup', (e) => {
+			if (this.state.inputValue !== this.inputRef.current.value) {
+				const value = this.inputRef.current.value;
+				this.setState({
+					inputValue: value,
+				})
+			}
+		})
+	}
+
+	render() {
+		return (
+			<div className="App">
+				<header className="App-header">
+					<img src={dnsController} className="App-logo" alt="logo" />
+					<small>Brought to you by <a href="https://www.6connect.com/">6connect</a></small>
+					<input type="text" ref={this.inputRef} className="primary-input" placeholder="ip address" />
+					<Row>
+						<ValidIPWidget mode="v4" value={this.state.inputValue} />
+						<ValidIPWidget mode="v6" value={this.state.inputValue} />
+					</Row>
+				</header>
+			</div>
+		);
+	}
 }
 
 export default App;
