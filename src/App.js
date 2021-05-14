@@ -3,10 +3,17 @@ import React from 'react';
 import styled from '@emotion/styled';
 
 import ValidIPWidget from './widgets/validAddress';
+import CompressedAddress from './widgets/compressedAddress';
 
 const Row = styled.div`
+	font-size: 1rem;
 	display: flex;
 	flex-wrap: wrap;
+	border-top: 1px solid rgba(255, 255, 255, 0.15);
+	width: 95%;
+	max-width: 400px;
+	justify-content: center;
+	padding: 0.5rem 0;
 `;
 
 class App extends React.Component {
@@ -39,6 +46,9 @@ class App extends React.Component {
 					<Row>
 						<ValidIPWidget mode="v4" value={this.state.inputValue} />
 						<ValidIPWidget mode="v6" value={this.state.inputValue} />
+					</Row>
+					<Row>
+						<CompressedAddress address={this.state.inputValue} />
 					</Row>
 				</header>
 			</div>
