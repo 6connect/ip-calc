@@ -19,9 +19,10 @@ const Row = styled.div`
 class App extends React.Component {
 	constructor() {
 		super();
+		const params = new URLSearchParams(document.location.search.substring(1));
 
 		this.state = {
-			inputValue: "",
+			inputValue: params.get('ip') || '',
 		}
 		this.inputRef = React.createRef();
 	}
@@ -42,7 +43,7 @@ class App extends React.Component {
 			<div className="App">
 				<header className="App-header">
 					<small>Brought to you by <a target="_blank" rel="noreferrer" href="https://www.6connect.com/">6connect</a></small>
-					<input type="text" ref={this.inputRef} className="primary-input" placeholder="ip address" />
+					<input type="text" defaultValue={this.state.inputValue} ref={this.inputRef} className="primary-input" placeholder="ip address" />
 					<Row>
 						<ValidIPWidget mode="v4" value={this.state.inputValue} />
 						<ValidIPWidget mode="v6" value={this.state.inputValue} />
