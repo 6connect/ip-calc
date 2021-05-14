@@ -1,6 +1,4 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheckCircle, faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 import styled from '@emotion/styled';
 const ipaddr = require('ipaddr.js');
 
