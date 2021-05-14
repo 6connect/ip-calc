@@ -1,8 +1,8 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheckCircle, faTimesCircle } from '@fortawesome/free-solid-svg-icons'
-import { validateV4, validateV6 } from '../utility';
 import styled from '@emotion/styled';
+const ipaddr = require('ipaddr.js');
 
 const Container = styled.div`
     display: block;
@@ -25,8 +25,21 @@ class ValidIPWidget extends React.Component {
         if (!this.props.mode) {
             return <></>
         }
+
+        let parsed = false;
+        try {
+            parsed = ipaddr.parse(this.props.value);
+        } catch (e) {
+            //Address is invalid or incomplete
+        }
+
         const mode = this.props.mode.toLowerCase();
-        const valid = mode === "v4" ? validateV4(this.props.value) : validateV6(this.props.value);
+        let valid = false;
+        try{
+            valid = mode === parsed.kind().substr(2);
+        } catch(e) {
+            //Invalid or incomplete address
+        }
         return (
             <Container className={valid ? 'valid' : 'invalid'}>
                 {
