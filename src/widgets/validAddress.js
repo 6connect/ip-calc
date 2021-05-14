@@ -11,9 +11,10 @@ const Container = styled.div`
     font-size: 1rem;
     padding: 0.25rem 1rem;
     margin: 0.25rem;
+    border: 0.2rem solid transparent;
 
     &.valid {
-        box-shadow: 0px 0px 0px 0.2rem #9BC53D;
+        border-color: #9BC53D;
         svg {
             color: #9BC53D;
         }
