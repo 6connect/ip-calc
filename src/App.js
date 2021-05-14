@@ -1,4 +1,3 @@
-import dnsController from './dns-controller@3x.png';
 import './App.css';
 import React from 'react';
 import styled from '@emotion/styled';
@@ -35,8 +34,7 @@ class App extends React.Component {
 		return (
 			<div className="App">
 				<header className="App-header">
-					<img src={dnsController} className="App-logo" alt="logo" />
-					<small>Brought to you by <a href="https://www.6connect.com/">6connect</a></small>
+					<small>Brought to you by <a target="_blank" href="https://www.6connect.com/">6connect</a></small>
 					<input type="text" ref={this.inputRef} className="primary-input" placeholder="ip address" />
 					<Row>
 						<ValidIPWidget mode="v4" value={this.state.inputValue} />
