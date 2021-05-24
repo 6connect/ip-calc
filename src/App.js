@@ -5,8 +5,6 @@ import styled from '@emotion/styled';
 import ValidIPWidget from './widgets/validAddress';
 import CompressedAddress from './widgets/compressedAddress';
 import ExpandedAddress from './widgets/expandedAddress';
-import { getExpandedAddress, getNumberOfSubnets } from './utility';
-const ipaddr = require('ipaddr.js');
 
 const Row = styled.div`
 	font-size: 1rem;
