@@ -36,9 +36,9 @@ class ValidIPWidget extends React.Component {
 
         const mode = this.props.mode.toLowerCase();
         let valid = false;
-        try{
+        try {
             valid = mode === parsed.kind().substr(2);
-        } catch(e) {
+        } catch (e) {
             //Invalid or incomplete address
         }
         return (
@@ -48,7 +48,7 @@ class ValidIPWidget extends React.Component {
                         valid ? <FontAwesomeIcon icon={faCheckCircle} /> : <FontAwesomeIcon icon={faTimesCircle} />
                     }</span> : <span>v6 {
                         valid ? <FontAwesomeIcon icon={faCheckCircle} /> : <FontAwesomeIcon icon={faTimesCircle} />
-                    }</span> 
+                    }</span>
                 }
             </Container>
         );

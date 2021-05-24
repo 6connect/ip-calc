@@ -1,7 +1,32 @@
-export function validateV4 (input) {
-    return /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(input);
+export function getNumberOfSubnets(startBit, endBit) {
+    const totalBits = endBit - startBit;
+    return Math.pow(2, totalBits);
 }
 
-export function validateV6 (input) {
-    return /(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))/.test(input);
+export function getExpandedAddress(address) {
+    let output = "";
+    for (let index = 0; index < address.parts.length; index++) {
+        if (index !== 0) {
+            output += ":";
+        }
+        let element = Number(address.parts[index]).toString(16);
+        while (element.length < 4) element = "0" + element;
+        output += element;
+    }
+    return output;
+}
+
+export function splitAtBit(address, cidr = 128) {
+    let first = "", count = 0;
+    for (let index = 0; index < address.length; index++) {
+        const element = address[index];
+        if (element !== ":") {
+            count += 4; // 4 bits to each hex character
+        }
+        first += element;
+        if (count >= cidr) {
+            break;
+        }
+    }
+    return [first, address.substr(first.length)];
 }

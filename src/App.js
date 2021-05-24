@@ -4,6 +4,9 @@ import styled from '@emotion/styled';
 
 import ValidIPWidget from './widgets/validAddress';
 import CompressedAddress from './widgets/compressedAddress';
+import ExpandedAddress from './widgets/expandedAddress';
+import { getExpandedAddress, getNumberOfSubnets } from './utility';
+const ipaddr = require('ipaddr.js');
 
 const Row = styled.div`
 	font-size: 1rem;
@@ -30,9 +33,14 @@ class App extends React.Component {
 	componentDidMount() {
 		this.inputRef.current.addEventListener('keyup', (e) => {
 			if (this.state.inputValue !== this.inputRef.current.value) {
-				const value = this.inputRef.current.value;
+				const value = this.inputRef.current.value.split('/');
+				let cidr = false;
+				if (value.length > 1 && parseInt(value[1]) > 0) {
+					cidr = parseInt(value[1]);
+				}
 				this.setState({
-					inputValue: value,
+					inputValue: value[0],
+					inputCidr: cidr,
 				})
 			}
 		})
@@ -50,6 +58,7 @@ class App extends React.Component {
 					</Row>
 					<Row>
 						<CompressedAddress address={this.state.inputValue} />
+						<ExpandedAddress address={this.state.inputValue} cidr={this.state.inputCidr} />
 					</Row>
 				</header>
 			</div>
