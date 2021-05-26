@@ -37,7 +37,7 @@ a:hover {
 
 .primary-input {
   padding: 1rem;
-  margin: 2rem auto;
+  margin: 2rem auto 1rem;
   font-size: 1.5rem;
   background: rgba(0,0,0,0.5);
   color: white;

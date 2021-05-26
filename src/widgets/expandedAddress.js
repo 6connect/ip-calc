@@ -24,7 +24,7 @@ class ExpandedAddress extends React.Component {
         }
         return (
             <Wrapper>
-                Expanded Address:
+                {this.props.descriptor !== false ? "Expanded Address:" : ""}
                 <Code>
                     <span>{split[0]}</span>
                     <SecondHalf>{split[1]}</SecondHalf>

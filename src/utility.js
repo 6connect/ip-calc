@@ -30,3 +30,7 @@ export function splitAtBit(address, cidr = 128) {
     }
     return [first, address.substr(first.length)];
 }
+
+export function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
