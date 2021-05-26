@@ -57,7 +57,7 @@ const SubnetInput = styled.input`
     background: #61dafb;
     border-radius: 0 1rem 1rem 0;
     font-size: 1rem;
-    padding: 0.25rem 1rem;
+    padding: 0.25rem 0.5rem 0.25rem 1rem;
     margin: 0.25rem auto;
 	margin-left: -0.7rem;
     border: 0.2rem solid transparent;
