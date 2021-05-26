@@ -16,19 +16,35 @@ export function getExpandedAddress(address) {
     return output;
 }
 
-export function splitAtBit(address, cidr = 128) {
-    let first = "", count = 0;
+export function splitAtBit(address, cidr = [128]) {
+    if (typeof cidr !== "object") {
+        cidr = [cidr];
+    }
+    for (let index = 1; index < cidr.length; index++) {
+        if (cidr[index] <= cidr[index-1]) {
+            cidr.splice(index-1, 1);
+        }
+    }
+
+    const output = [];
+
+    let current = "", count = 0;
     for (let index = 0; index < address.length; index++) {
         const element = address[index];
         if (element !== ":") {
             count += 4; // 4 bits to each hex character
         }
-        first += element;
-        if (count >= cidr) {
-            break;
+        current += element;
+        if (count >= cidr[0]) {
+            output.push(`${current}`);
+            current = "";
+            cidr.splice(0, 1);
         }
     }
-    return [first, address.substr(first.length)];
+    if (current.length > 0) {
+        output.push(current);
+    }
+    return output;//[first, address.substr(first.length)];
 }
 
 export function numberWithCommas(x) {

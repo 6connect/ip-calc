@@ -4,8 +4,16 @@ import { Code, Wrapper } from './common';
 import styled from '@emotion/styled';
 const ipaddr = require('ipaddr.js');
 
-const SecondHalf = styled.span`
-    color: #25A9DF;
+const Rainbow = styled.span`
+    & > span:nth-of-type(1) {
+        //color: #25A9DF;
+    }
+    & > span:nth-of-type(2) {
+        color: #25A9DF;
+    }
+    & > span:nth-of-type(3) {
+        color: #7BE0AD;
+    }
 `;
 
 class ExpandedAddress extends React.Component {
@@ -22,12 +30,16 @@ class ExpandedAddress extends React.Component {
         if (!split) {
             split = [getExpandedAddress(address), ''];
         }
+        const content = [];
+        for (let index = 0; index < split.length; index++) {
+            content.push(<span key={index}>{split[index]}</span>);
+
+        }
         return (
             <Wrapper>
                 {this.props.descriptor !== false ? "Expanded Address:" : ""}
                 <Code>
-                    <span>{split[0]}</span>
-                    <SecondHalf>{split[1]}</SecondHalf>
+                    <Rainbow>{content}</Rainbow>
                 </Code>
             </Wrapper>
         );
