@@ -9,9 +9,6 @@ const SecondHalf = styled.span`
 `;
 
 class ExpandedAddress extends React.Component {
-    constructor (props) {
-        super(props);
-    }
     render() {
         let address = '';
         let split = false;
