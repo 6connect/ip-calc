@@ -140,7 +140,7 @@ class App extends React.Component {
 				<SubnetWrapper key={index} className="mb-4">
 					<ExpandedAddress descriptor={false} address={this.state.inputValue} cidr={[lastCIDR, subnet]} />
 					<SubnetInput onChange={this.subnetUpdate.bind(this)} step="4" data-index={index} type="number" defaultValue={subnet} min="0" max="128" />
-					<div>Total number of <b>/{subnet}</b> subnets in a <b>/{lastCIDR}</b>: {numberWithCommas(Math.pow(2, subnet - lastCIDR))}</div>
+					<div><u>{numberWithCommas(Math.pow(2, subnet - lastCIDR))}</u> <b>/{subnet}</b> subnets in a <b>/{lastCIDR}</b></div>
 				</SubnetWrapper>
 			);
 			lastCIDR = subnet;
