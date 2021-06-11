@@ -38,6 +38,9 @@ const AddNewSubnet = styled.div`
 
 const SubnetWrapper = styled.div`
 	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 
 	& > div:nth-of-type(1) {
 		display: inline-block;
