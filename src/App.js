@@ -117,7 +117,7 @@ class App extends React.Component {
 		if (this.state.subnets.length > 0) {
 			cidr = this.state.subnets[this.state.subnets.length - 1];
 		}
-		cidr = Math.ceil(cidr / 4 + 1) * 4;
+		cidr = Math.ceil(cidr / 4 + 4) * 4;
 		const subnets = this.state.subnets;
 		subnets.push(cidr);
 		this.setState({ subnets });
