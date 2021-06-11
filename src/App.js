@@ -149,7 +149,12 @@ class App extends React.Component {
 		return (
 			<div className="App">
 				<header className="App-header pt-8 pb-8">
-					<small>Brought to you by <a target="_blank" rel="noreferrer" href="https://www.6connect.com/">6connect</a></small>
+					<small>
+						Brought to you by
+						<a target="_blank" rel="noreferrer" href="https://www.6connect.com/">
+							<img src="/logo.svg" className="inline-block w-32 mx-2 pb-1" alt="6connect" />
+						</a>
+					</small>
 					<input type="text" defaultValue={this.state.inputValue} ref={this.inputRef} className="primary-input" placeholder="ip address" />
 					<Row>
 						<div className="text-right w-full pr-8">CIDR <FontAwesomeIcon icon={faArrowDown} /></div>
