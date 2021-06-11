@@ -9,7 +9,7 @@ const Rainbow = styled.span`
         //color: #25A9DF;
     }
     & > span:nth-of-type(2) {
-        color: #25A9DF;
+        color: var(--color-primary);
     }
     & > span:nth-of-type(3) {
         color: #7BE0AD;
@@ -33,7 +33,6 @@ class ExpandedAddress extends React.Component {
         const content = [];
         for (let index = 0; index < split.length; index++) {
             content.push(<span key={index}>{split[index]}</span>);
-
         }
         return (
             <Wrapper>

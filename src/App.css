@@ -8,7 +8,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: var(--color-bg);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -39,7 +39,7 @@ a:hover {
   padding: 1rem;
   margin: 2rem auto 1rem;
   font-size: 1.5rem;
-  background: rgba(0,0,0,0.5);
+  background: var(--color-darker);
   color: white;
   border: none;
   outline: none;

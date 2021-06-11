@@ -2,10 +2,9 @@ import './App.css';
 import React from 'react';
 import styled from '@emotion/styled';
 
-import CompressedAddress from './widgets/compressedAddress';
 import ExpandedAddress from './widgets/expandedAddress';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlusCircle } from '@fortawesome/free-solid-svg-icons'
+import { faArrowDown, faArrowUp, faPlusCircle } from '@fortawesome/free-solid-svg-icons'
 import { numberWithCommas } from './utility';
 
 const Row = styled.div`
@@ -39,7 +38,6 @@ const AddNewSubnet = styled.div`
 
 const SubnetWrapper = styled.div`
 	width: 100%;
-	margin-bottom: 1rem;
 
 	& > div:nth-of-type(1) {
 		display: inline-block;
@@ -57,14 +55,22 @@ const SubnetInput = styled.input`
     background: #61dafb;
     border-radius: 0 1rem 1rem 0;
     font-size: 1rem;
-    padding: 0.25rem 0.5rem 0.25rem 1rem;
+    padding: 0.15rem 0.5rem 0.15rem 1rem;
     margin: 0.25rem auto;
 	margin-left: -0.7rem;
     border: 0.2rem solid transparent;
     overflow-wrap: break-word;
 	position: relative;
 	outline: none;
+	color: var(--color-bg);
+	font-weight: bold;
+	&[disabled] {
+		color: white;
+		background: var(--color-secondary);
+	}
 `;
+
+let firstRender = true;
 
 class App extends React.Component {
 	constructor() {
@@ -72,26 +78,30 @@ class App extends React.Component {
 		const params = new URLSearchParams(document.location.search.substring(1));
 
 		this.state = {
-			inputValue: params.get('ip') || '::',
+			inputValue: params.get('ip') || '1234::/48',
 			subnets: [],
 		}
 		this.inputRef = React.createRef();
 	}
 
-	componentDidMount() {
-		this.inputRef.current.addEventListener('keyup', (e) => {
-			if (this.state.inputValue !== this.inputRef.current.value) {
-				const value = this.inputRef.current.value.split('/');
-				let cidr = undefined;
-				if (value.length > 1 && parseInt(value[1]) > 0) {
-					cidr = parseInt(value[1]);
-				}
-				this.setState({
-					inputValue: value[0],
-					inputCidr: cidr,
-				})
+	calculate() {
+		if (this.state.inputValue !== this.inputRef.current.value || firstRender) {
+			firstRender = false;
+			const value = this.inputRef.current.value.split('/');
+			let cidr = undefined;
+			if (value.length > 1 && parseInt(value[1]) > 0) {
+				cidr = parseInt(value[1]);
 			}
-		})
+			this.setState({
+				inputValue: value[0],
+				inputCidr: cidr,
+			})
+		}
+	}
+
+	componentDidMount() {
+		this.inputRef.current.addEventListener('keyup', this.calculate.bind(this))
+		this.calculate();
 	}
 
 	addSubnet() {
@@ -126,31 +136,33 @@ class App extends React.Component {
 		let lastCIDR = this.state.inputCidr;
 		for (let index = 0; index < this.state.subnets.length; index++) {
 			const subnet = this.state.subnets[index];
-			subnetElements.push(<SubnetWrapper key={index}>
-				<ExpandedAddress descriptor={false} address={this.state.inputValue} cidr={[lastCIDR,subnet]} />
-				<SubnetInput onChange={this.subnetUpdate.bind(this)} step="4" data-index={index} type="number" defaultValue={subnet} />
-				<div>Total number of <b>/{subnet}</b> subnets in a <b>/{lastCIDR}</b>: {numberWithCommas(Math.pow(2, subnet - lastCIDR))}</div>
-			</SubnetWrapper>);
+			subnetElements.push(
+				<SubnetWrapper key={index} className="mb-4">
+					<ExpandedAddress descriptor={false} address={this.state.inputValue} cidr={[lastCIDR, subnet]} />
+					<SubnetInput onChange={this.subnetUpdate.bind(this)} step="4" data-index={index} type="number" defaultValue={subnet} />
+					<div>Total number of <b>/{subnet}</b> subnets in a <b>/{lastCIDR}</b>: {numberWithCommas(Math.pow(2, subnet - lastCIDR))}</div>
+				</SubnetWrapper>
+			);
 			lastCIDR = subnet;
 		}
 
 		return (
 			<div className="App">
-				<header className="App-header">
+				<header className="App-header pt-8 pb-8">
 					<small>Brought to you by <a target="_blank" rel="noreferrer" href="https://www.6connect.com/">6connect</a></small>
 					<input type="text" defaultValue={this.state.inputValue} ref={this.inputRef} className="primary-input" placeholder="ip address" />
-					{/*<Row>
-						<ValidIPWidget mode="v4" value={this.state.inputValue} />
-						<ValidIPWidget mode="v6" value={this.state.inputValue} />
-					</Row>*/}
 					<Row>
-						<ExpandedAddress address={this.state.inputValue} cidr={this.state.inputCidr} />
-						<CompressedAddress address={this.state.inputValue} />
+						<div className="text-right w-full pr-8">CIDR <FontAwesomeIcon icon={faArrowDown} /></div>
+						<SubnetWrapper>
+							<ExpandedAddress descriptor={false} address={this.state.inputValue} cidr={[this.state.inputCidr]} />
+							<SubnetInput step="4" type="number" defaultValue={this.state.inputCidr} disabled />
+						</SubnetWrapper>
+						<div className="text-right w-full pr-20"><FontAwesomeIcon icon={faArrowUp} /> Expanded address</div>
 					</Row>
 					<Row>
 						{subnetElements}
 						<span onClick={this.addSubnet.bind(this)}>
-							<AddNewSubnet><FontAwesomeIcon icon={faPlusCircle} /></AddNewSubnet>
+							<AddNewSubnet>Add Subnet <FontAwesomeIcon icon={faPlusCircle} /></AddNewSubnet>
 						</span>
 					</Row>
 				</header>

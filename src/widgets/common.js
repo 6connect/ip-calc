@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 export const Code = styled.code`
     max-width: 100%;
     display: block;
-    background: #1E2134;
+    background: var(--color-darker);
     border-radius: 1rem;
     font-size: 1rem;
     padding: 0.25rem 1rem;

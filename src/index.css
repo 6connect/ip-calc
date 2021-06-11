@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --color-primary: #326DE5;
+  --color-secondary: #CF0939;
+  --color-tertiary: #F69E1D;
+
+  --color-bg: #242424;
+  --color-darker: #121212;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -9,6 +18,13 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+
+@media (max-width: 765px) {
+  :root {
+    font-size: 3.4vw;
+  }
 }
 
 code {
