@@ -160,7 +160,7 @@ class App extends React.Component {
 						<div className="text-right w-full pr-8">CIDR <FontAwesomeIcon icon={faArrowDown} /></div>
 						<SubnetWrapper>
 							<ExpandedAddress descriptor={false} address={this.state.inputValue} cidr={[0, this.state.inputCidr]} />
-							<SubnetInput step="4" type="number" defaultValue={this.state.inputCidr} disabled />
+							<SubnetInput step="4" type="number" defaultValue={this.state.inputCidr} disabled title="Adjust this CIDR using the input above" />
 						</SubnetWrapper>
 						<div className="text-right w-full pr-20"><FontAwesomeIcon icon={faArrowUp} /> Expanded address</div>
 					</Row>
