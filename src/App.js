@@ -139,7 +139,7 @@ class App extends React.Component {
 			subnetElements.push(
 				<SubnetWrapper key={index} className="mb-4">
 					<ExpandedAddress descriptor={false} address={this.state.inputValue} cidr={[lastCIDR, subnet]} />
-					<SubnetInput onChange={this.subnetUpdate.bind(this)} step="4" data-index={index} type="number" defaultValue={subnet} />
+					<SubnetInput onChange={this.subnetUpdate.bind(this)} step="4" data-index={index} type="number" defaultValue={subnet} min="0" max="128" />
 					<div>Total number of <b>/{subnet}</b> subnets in a <b>/{lastCIDR}</b>: {numberWithCommas(Math.pow(2, subnet - lastCIDR))}</div>
 				</SubnetWrapper>
 			);
@@ -159,7 +159,7 @@ class App extends React.Component {
 					<Row>
 						<div className="text-right w-full pr-8">CIDR <FontAwesomeIcon icon={faArrowDown} /></div>
 						<SubnetWrapper>
-							<ExpandedAddress descriptor={false} address={this.state.inputValue} cidr={[this.state.inputCidr]} />
+							<ExpandedAddress descriptor={false} address={this.state.inputValue} cidr={[0, this.state.inputCidr]} />
 							<SubnetInput step="4" type="number" defaultValue={this.state.inputCidr} disabled />
 						</SubnetWrapper>
 						<div className="text-right w-full pr-20"><FontAwesomeIcon icon={faArrowUp} /> Expanded address</div>

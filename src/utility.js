@@ -21,14 +21,18 @@ export function splitAtBit(address, cidr = [128]) {
         cidr = [cidr];
     }
     for (let index = 1; index < cidr.length; index++) {
-        if (cidr[index] <= cidr[index-1]) {
-            cidr.splice(index-1, 1);
+        if (cidr[index] <= cidr[index - 1]) {
+            cidr.splice(index - 1, 1);
         }
     }
 
     const output = [];
 
     let current = "", count = 0;
+    if (cidr[0] === 0) {
+        output.push("");
+        cidr.splice(0,1);
+    }
     for (let index = 0; index < address.length; index++) {
         const element = address[index];
         if (element !== ":") {

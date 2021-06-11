@@ -6,7 +6,7 @@ const ipaddr = require('ipaddr.js');
 
 const Rainbow = styled.span`
     & > span:nth-of-type(1) {
-        //color: #25A9DF;
+        color: var(--color-tertiary);
     }
     & > span:nth-of-type(2) {
         color: var(--color-primary);
