@@ -11,7 +11,6 @@ const Row = styled.div`
 	font-size: 1rem;
 	display: flex;
 	flex-wrap: wrap;
-	border-top: 1px solid rgba(255, 255, 255, 0.15);
 	width: 95%;
 	max-width: 500px;
 	justify-content: center;
