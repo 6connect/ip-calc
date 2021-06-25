@@ -42,6 +42,10 @@ const SubnetWrapper = styled.div`
 	align-items: center;
 	justify-content: center;
 
+	&[disabled] code span {
+		opacity: 0.75;
+	}
+
 	& > div:nth-of-type(1) {
 		display: inline-block;
 		width: calc(100% - 4rem);
@@ -51,6 +55,7 @@ const SubnetWrapper = styled.div`
 		margin-bottom: 0;
 	}
 `;
+
 const SubnetInput = styled.input`
 	display: inline-block;
 	box-sizing: border-box;
@@ -67,9 +72,14 @@ const SubnetInput = styled.input`
 	outline: none;
 	color: var(--color-bg);
 	font-weight: bold;
+	&::-webkit-inner-spin-button {
+		opacity: 1;
+	}
 	&[disabled] {
-		color: white;
-		background: var(--color-secondary);
+		&::-webkit-inner-spin-button {
+			opacity: 0;
+		}
+		background: var(--color-light-grey);
 	}
 `;
 
@@ -81,7 +91,7 @@ class App extends React.Component {
 		const params = new URLSearchParams(document.location.search.substring(1));
 
 		this.state = {
-			inputValue: params.get('ip') || '1234::/48',
+			inputValue: params.get('ip') || '1234::/32',
 			subnets: [],
 		}
 		this.inputRef = React.createRef();
@@ -140,11 +150,13 @@ class App extends React.Component {
 		for (let index = 0; index < this.state.subnets.length; index++) {
 			const subnet = this.state.subnets[index];
 			subnetElements.push(
-				<SubnetWrapper key={index} className="mb-4">
-					<ExpandedAddress descriptor={false} address={this.state.inputValue} cidr={[lastCIDR, subnet]} />
-					<SubnetInput onChange={this.subnetUpdate.bind(this)} step="4" data-index={index} type="number" defaultValue={subnet} min="0" max="128" />
+				<div className="w-full mb-4" key={index}>
+					<SubnetWrapper>
+						<ExpandedAddress descriptor={false} address={this.state.inputValue} cidr={[lastCIDR, subnet]} />
+						<SubnetInput onChange={this.subnetUpdate.bind(this)} step="4" data-index={index} type="number" defaultValue={subnet} min="0" max="128" />
+					</SubnetWrapper>
 					<div><u>{numberWithCommas(Math.pow(2, subnet - lastCIDR))}</u> <b>/{subnet}</b> subnets in a <b>/{lastCIDR}</b></div>
-				</SubnetWrapper>
+				</div>
 			);
 			lastCIDR = subnet;
 		}
@@ -152,20 +164,20 @@ class App extends React.Component {
 		return (
 			<div className="App">
 				<header className="App-header pt-8 pb-8">
-					<small>
-						Brought to you by
-						<a target="_blank" rel="noreferrer" href="https://www.6connect.com/">
-							<img src="/logo.svg" className="inline-block w-32 mx-2 pb-1" alt="6connect" />
-						</a>
-					</small>
-					<input type="text" defaultValue={this.state.inputValue} ref={this.inputRef} className="primary-input" placeholder="ip address" />
 					<Row>
+						<small>
+							Brought to you by
+							<a target="_blank" rel="noreferrer" href="https://www.6connect.com/">
+								<img src="/logo.svg" className="inline-block w-32 mx-2 pb-1" alt="6connect" />
+							</a>
+						</small>
+						<input type="text" defaultValue={this.state.inputValue} ref={this.inputRef} className="primary-input" placeholder="ip address" />
 						<div className="text-right w-full pr-8">CIDR <FontAwesomeIcon icon={faArrowDown} /></div>
-						<SubnetWrapper>
+						<SubnetWrapper disabled>
 							<ExpandedAddress descriptor={false} address={this.state.inputValue} cidr={[0, this.state.inputCidr]} />
 							<SubnetInput step="4" type="number" defaultValue={this.state.inputCidr} disabled title="Adjust this CIDR using the input above" />
 						</SubnetWrapper>
-						<div className="text-right w-full pr-20"><FontAwesomeIcon icon={faArrowUp} /> Expanded address</div>
+						<div className="text-center w-full"><FontAwesomeIcon icon={faArrowUp} /> Expanded address</div>
 					</Row>
 					<Row>
 						{subnetElements}
