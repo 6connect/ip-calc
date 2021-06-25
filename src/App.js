@@ -107,7 +107,7 @@ class App extends React.Component {
 			}
 			this.setState({
 				inputValue: value[0],
-				inputCidr: cidr,
+				inputCidr: typeof cidr === 'number' ? cidr : 0,
 			})
 		}
 	}
@@ -119,7 +119,7 @@ class App extends React.Component {
 
 	addSubnet() {
 		if (!this.state.inputCidr) {
-			let defaultCIDR = 23;
+			let defaultCIDR = 0;
 			this.inputRef.current.value = this.state.inputValue + "/" + defaultCIDR
 			this.setState({
 				inputCidr: defaultCIDR,
@@ -153,7 +153,7 @@ class App extends React.Component {
 				<div className="w-full mb-4" key={index}>
 					<SubnetWrapper>
 						<ExpandedAddress descriptor={false} address={this.state.inputValue} cidr={[lastCIDR, subnet]} />
-						<SubnetInput onChange={this.subnetUpdate.bind(this)} step="4" data-index={index} type="number" defaultValue={subnet} min="0" max="128" />
+						<SubnetInput onChange={this.subnetUpdate.bind(this)} step="4" data-index={index} type="number" defaultValue={subnet} min={lastCIDR} max="128" />
 					</SubnetWrapper>
 					<div><u>{numberWithCommas(Math.pow(2, subnet - lastCIDR))}</u> <b>/{subnet}</b> subnets in a <b>/{lastCIDR}</b></div>
 				</div>
