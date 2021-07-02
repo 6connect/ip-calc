@@ -173,6 +173,11 @@ class App extends React.Component {
 								<img src="/logo.svg" className="inline-block w-32 mx-2 pb-1" alt="6connect" />
 							</a>
 						</small>
+					</Row>
+					<Row>
+						<h1>IPv6 Subnet Calculator</h1>
+					</Row>
+					<Row>
 						<input type="text" defaultValue={this.state.inputValue} ref={this.inputRef} className="primary-input" placeholder="ip address" />
 						<div className="text-right w-full pr-8">CIDR <FontAwesomeIcon icon={faArrowDown} /></div>
 						<SubnetWrapper disabled>
