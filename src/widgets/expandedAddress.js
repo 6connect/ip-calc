@@ -5,12 +5,12 @@ import styled from '@emotion/styled';
 const ipaddr = require('ipaddr.js');
 
 const Indicator = styled.div`
-    border-radius: 0.35em 0.35em 0 0;
+    border-radius: 0.35em;
     position: absolute;
     background: currentColor;
     bottom: calc(100% + 1em);
     left: 0;
-    width: 2em;
+    width: 2.5em;
     margin-left: -1em;
     &::after {
         position: absolute;
@@ -23,6 +23,7 @@ const Indicator = styled.div`
     }
     & > span {
         color: #fff;
+        white-space: nowrap;
     }
 `;
 const Rainbow = styled.span`
@@ -64,7 +65,7 @@ class ExpandedAddress extends React.Component {
         console.log(splits)
         for (let index = 0; index < split.length; index++) {
             content.push(<span key={index}>
-                {splits[index-1] && <Indicator><span>{splits[index-1]}</span></Indicator>}
+                {splits[index-1] && <Indicator><span>/{splits[index-1]}</span></Indicator>}
                 {split[index]}
             </span>);
         }

@@ -169,6 +169,11 @@ class App extends React.Component {
 		let lastCIDR = this.state.inputCidr;
 		for (let index = 0; index < this.state.subnets.length; index++) {
 			let subnet = this.state.subnets[index];
+			const info = {
+				address: this.state.inputValue,
+				start: lastCIDR,
+				end: subnet,
+			}
 			subnetElements.push(
 				<div className="w-full my-4" key={index}>
 					<SubnetWrapper>
@@ -177,7 +182,7 @@ class App extends React.Component {
 					</SubnetWrapper>
 					<div>
 						<u>{numberWithCommas(Math.pow(2, subnet - lastCIDR))}</u> <b>/{subnet}</b> subnets in a <b>/{lastCIDR}</b>
-						<Export title="Export all possible subnets as CSV" onClick={exportAndDownload} data-address={this.state.inputValue} data-start={lastCIDR} data-end={subnet}>
+						<Export title="Export all possible subnets as CSV" onClick={exportAndDownload.bind(info)} >
 							<FontAwesomeIcon icon={faSave} />
 						</Export>
 					</div>

@@ -86,7 +86,7 @@ export function allPossibleAddresses(address, parent_cidr, child_cidr) {
 
     const output = new Array(total_number);
     for (let index = 0; index < total_number; index++) {
-    
+
         // get the binary version of our address to output
         let binaryOutput = binaryString.substr(0, parent_cidr) + withLeadingZeros(index.toString(2), bits) + binaryString.substr(child_cidr);
 
@@ -116,14 +116,10 @@ export function download(text, filename) {
     document.body.removeChild(element);
 }
 
-export function exportAndDownload (e) {
-    let element = e.target;
-    if (!element.dataset || !element.dataset.address) {
-        element = element.parentElement;
-    }
-    let address = element.dataset.address;
-    let start = Number(element.dataset.start);
-    let end = Number(element.dataset.end);
+export function exportAndDownload() {
+    let address = this.address;
+    let start = this.start;
+    let end = this.end;
 
     const fileName = `${ipaddr.parse(address).toString()} ${start}-${end}.csv`;
     let array = [address];
@@ -133,7 +129,7 @@ export function exportAndDownload (e) {
     let outputString = "";
     for (let index = 0; index < array.length; index++) {
         let outputAddress = ipaddr.parse(array[index]).toString();
-        outputString += outputAddress + (index < array.length-1 ? ",\n" : "");
+        outputString += outputAddress + (index < array.length - 1 ? ",\n" : "");
     }
     download(outputString, fileName);
 }
