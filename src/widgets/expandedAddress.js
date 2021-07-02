@@ -1,6 +1,6 @@
 import React from 'react';
 import { getExpandedAddress, splitAtBit } from '../utility';
-import { Code, Wrapper } from './common';
+import { Code } from './common';
 import styled from '@emotion/styled';
 const ipaddr = require('ipaddr.js');
 
@@ -20,6 +20,7 @@ class ExpandedAddress extends React.Component {
     render() {
         let address = '';
         let split = false;
+
         try {
             address = ipaddr.parse(this.props.address);
             split = splitAtBit(getExpandedAddress(address), this.props.cidr);
@@ -35,12 +36,12 @@ class ExpandedAddress extends React.Component {
             content.push(<span key={index}>{split[index]}</span>);
         }
         return (
-            <Wrapper>
+            <div>
                 {this.props.descriptor !== false ? "Expanded Address:" : ""}
                 <Code>
                     <Rainbow>{content}</Rainbow>
                 </Code>
-            </Wrapper>
+            </div>
         );
     }
 }

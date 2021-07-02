@@ -26,6 +26,5 @@ export const Code = styled.code`
 export const Wrapper = styled.div`
     text-align: center;
     display: block;
-    margin-bottom: 1rem;
     max-width: 100%;
 `;

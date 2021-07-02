@@ -4,8 +4,8 @@ import styled from '@emotion/styled';
 
 import ExpandedAddress from './widgets/expandedAddress';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowDown, faArrowUp, faPlusCircle } from '@fortawesome/free-solid-svg-icons'
-import { numberWithCommas } from './utility';
+import { faArrowDown, faArrowUp, faPlusCircle, faSave } from '@fortawesome/free-solid-svg-icons'
+import { numberWithCommas, exportAndDownload } from './utility';
 
 const Row = styled.div`
 	font-size: 1rem;
@@ -15,6 +15,15 @@ const Row = styled.div`
 	max-width: 500px;
 	justify-content: center;
 	padding: 0.5rem 0;
+`;
+
+const Export = styled.div`
+	padding: 0.25em 1em;
+	display: inline-block;
+	cursor: pointer;
+	&:hover {
+		color: var(--color-primary);
+	}
 `;
 
 const AddNewSubnet = styled.div`
@@ -90,7 +99,7 @@ class App extends React.Component {
 		const params = new URLSearchParams(document.location.search.substring(1));
 
 		this.state = {
-			inputValue: params.get('ip') || '1234::/32',
+			inputValue: params.get('ip') || '1234::/4',
 			subnets: [],
 		}
 		this.inputRef = React.createRef();
@@ -157,7 +166,12 @@ class App extends React.Component {
 						<ExpandedAddress descriptor={false} address={this.state.inputValue} cidr={[lastCIDR, subnet]} />
 						<SubnetInput onChange={this.subnetUpdate.bind(this)} step="4" data-index={index} type="number" defaultValue={subnet} min={lastCIDR} max="128" />
 					</SubnetWrapper>
-					<div><u>{numberWithCommas(Math.pow(2, subnet - lastCIDR))}</u> <b>/{subnet}</b> subnets in a <b>/{lastCIDR}</b></div>
+					<div>
+						<u>{numberWithCommas(Math.pow(2, subnet - lastCIDR))}</u> <b>/{subnet}</b> subnets in a <b>/{lastCIDR}</b>
+						<Export title="Export all possible subnets as CSV" onClick={exportAndDownload} data-address={this.state.inputValue} data-start={lastCIDR} data-end={subnet}>
+							<FontAwesomeIcon icon={faSave} />
+						</Export>
+					</div>
 				</div>
 			);
 			lastCIDR = subnet;
