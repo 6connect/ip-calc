@@ -170,7 +170,7 @@ class App extends React.Component {
 		for (let index = 0; index < this.state.subnets.length; index++) {
 			let subnet = this.state.subnets[index];
 			subnetElements.push(
-				<div className="w-full mb-4" key={index}>
+				<div className="w-full my-4" key={index}>
 					<SubnetWrapper>
 						<ExpandedAddress descriptor={false} address={this.state.inputValue} cidr={[lastCIDR, subnet]} />
 						<SubnetInput onChange={this.subnetUpdate.bind(this)} step="4" data-index={index} type="number" defaultValue={subnet} min={lastCIDR} max="128" />
