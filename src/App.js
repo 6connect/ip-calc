@@ -178,7 +178,7 @@ class App extends React.Component {
 						<h1>IPv6 Subnet Calculator</h1>
 					</Row>
 					<Row>
-						<input type="text" defaultValue={this.state.inputValue} ref={this.inputRef} className="primary-input" placeholder="ip address" />
+						<input type="text" defaultValue={this.state.inputValue} ref={this.inputRef} className="primary-input" placeholder="ip address" autoFocus />
 						<div className="text-right w-full pr-8">CIDR <FontAwesomeIcon icon={faArrowDown} /></div>
 						<SubnetWrapper disabled>
 							<ExpandedAddress descriptor={false} address={this.state.inputValue} cidr={[0, this.state.inputCidr]} />
