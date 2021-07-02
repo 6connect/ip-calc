@@ -147,7 +147,10 @@ class App extends React.Component {
 		const subnetElements = [];
 		let lastCIDR = this.state.inputCidr;
 		for (let index = 0; index < this.state.subnets.length; index++) {
-			const subnet = this.state.subnets[index];
+			let subnet = this.state.subnets[index];
+			if (index > 0 && lastCIDR > subnet) {
+				subnet = this.state.subnets[index] = lastCIDR;
+			}
 			subnetElements.push(
 				<div className="w-full mb-4" key={index}>
 					<SubnetWrapper>
