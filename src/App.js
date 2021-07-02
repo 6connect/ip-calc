@@ -99,7 +99,7 @@ class App extends React.Component {
 		const params = new URLSearchParams(document.location.search.substring(1));
 
 		this.state = {
-			inputValue: params.get('ip') || '1234::/4',
+			inputValue: params.get('ip') || '1234::/16',
 			subnets: [],
 		}
 		this.inputRef = React.createRef();
