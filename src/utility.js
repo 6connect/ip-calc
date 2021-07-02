@@ -126,7 +126,10 @@ export function exportAndDownload (e) {
     let end = Number(element.dataset.end);
 
     const fileName = `${ipaddr.parse(address).toString()} ${start}-${end}.csv`;
-    const array = allPossibleAddresses(ipaddr.parse(address), start, end);
+    let array = [address];
+    if (start !== end) {
+        array = allPossibleAddresses(ipaddr.parse(address), start, end);
+    }
     let outputString = "";
     for (let index = 0; index < array.length; index++) {
         let outputAddress = ipaddr.parse(array[index]).toString();

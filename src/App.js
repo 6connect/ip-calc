@@ -141,14 +141,26 @@ class App extends React.Component {
 		cidr = Math.ceil(cidr / 4 + 4) * 4;
 		const subnets = this.state.subnets;
 		subnets.push(cidr);
-		this.setState({ subnets });
+		this.correctSubnets(subnets);
 	}
 
 	subnetUpdate(e) {
 		const subnets = this.state.subnets;
 		subnets[parseInt(e.target.dataset.index)] = e.target.value;
+		this.correctSubnets(subnets);
+	}
+
+	correctSubnets(subnets) {
+		let lastCIDR = this.state.inputCidr;
+		for (let index = 0; index < subnets.length; index++) {
+			let subnet = subnets[index];
+			if (index > 0 && lastCIDR > subnet) {
+				subnet = subnets[index] = lastCIDR;
+			}
+			lastCIDR = subnet;
+		}
 		this.setState({
-			subnets
+			subnets,
 		});
 	}
 
@@ -157,9 +169,6 @@ class App extends React.Component {
 		let lastCIDR = this.state.inputCidr;
 		for (let index = 0; index < this.state.subnets.length; index++) {
 			let subnet = this.state.subnets[index];
-			if (index > 0 && lastCIDR > subnet) {
-				subnet = this.state.subnets[index] = lastCIDR;
-			}
 			subnetElements.push(
 				<div className="w-full mb-4" key={index}>
 					<SubnetWrapper>
