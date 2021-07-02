@@ -62,7 +62,6 @@ class ExpandedAddress extends React.Component {
             split = [getExpandedAddress(address), ''];
         }
         const content = [];
-        console.log(splits)
         for (let index = 0; index < split.length; index++) {
             content.push(<span key={index}>
                 {splits[index-1] && <Indicator><span>/{splits[index-1]}</span></Indicator>}
