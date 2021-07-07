@@ -50,8 +50,8 @@ const SubnetWrapper = styled.div`
 	align-items: center;
 	justify-content: center;
 
-	&[disabled] code span {
-		opacity: 0.75;
+	&[disabled] {
+		cursor: not-allowed;
 	}
 
 	& > div:nth-of-type(1) {
@@ -87,7 +87,7 @@ const SubnetInput = styled.input`
 		&::-webkit-inner-spin-button {
 			opacity: 0;
 		}
-		background: var(--color-light-grey);
+		cursor: not-allowed;
 	}
 `;
 
