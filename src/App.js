@@ -152,7 +152,7 @@ class App extends React.Component {
 
 	subnetUpdate(e) {
 		const subnets = this.state.subnets;
-		subnets[parseInt(e.target.dataset.index)] = e.target.value;
+		subnets[parseInt(e.target.dataset.index)] = parseInt(e.target.value);
 		this.correctSubnets(subnets);
 	}
 
