@@ -161,7 +161,7 @@ class App extends React.Component {
 		for (let index = 0; index < subnets.length; index++) {
 			let subnet = subnets[index];
 			if (index > 0 && lastCIDR > subnet) {
-				subnet = subnets[index] = lastCIDR;
+				subnet = subnets[index] = Math.min(lastCIDR + 1, 128);
 			}
 			lastCIDR = subnet;
 		}
