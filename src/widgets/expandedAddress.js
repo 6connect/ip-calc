@@ -8,7 +8,7 @@ const Indicator = styled.div`
     border-radius: 0.35em;
     position: absolute;
     background: currentColor;
-    bottom: calc(100% + 1em);
+    bottom: calc(100% + 1.25em);
     left: 0;
     width: 2.5em;
     margin-left: -1em;
@@ -38,6 +38,9 @@ const Rainbow = styled.span`
     }
     & > span:nth-of-type(3) {
         color: #7BE0AD;
+        & > div {
+            color: #67bc91;
+        }
     }
 `;
 
