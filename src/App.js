@@ -26,6 +26,7 @@ const Export = styled.div`
 	}
 	&[disabled] {
 		color: var(--color-error);
+		opacity: 0.5;
 		pointer-events: none;
 		cursor: not-allowed;
 	}
