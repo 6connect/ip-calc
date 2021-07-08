@@ -25,7 +25,9 @@ const Export = styled.div`
 		color: var(--color-primary);
 	}
 	&[disabled] {
-		color: var(--color-error)
+		color: var(--color-error);
+		pointer-events: none;
+		cursor: not-allowed;
 	}
 `;
 
