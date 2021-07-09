@@ -129,7 +129,7 @@ export function exportAndDownload() {
     let outputString = "";
     for (let index = 0; index < array.length; index++) {
         let outputAddress = ipaddr.parse(array[index]).toString();
-        outputString += outputAddress + (index < array.length - 1 ? ",\n" : "");
+        outputString += outputAddress + ("/" + this.end) + (index < array.length - 1 ? ",\n" : "");
     }
     download(outputString, fileName);
 }
