@@ -25,6 +25,16 @@ const Indicator = styled.div`
         color: #fff;
         white-space: nowrap;
     }
+
+    &.flipped {
+        bottom: unset;
+        top: calc(100% + 1.25em);
+        &::after {
+            top: unset;
+            bottom: 100%;
+            transform: rotate(180deg);
+        }
+    }
 `;
 const Rainbow = styled.span`
     & > span {
@@ -59,7 +69,7 @@ class ExpandedAddress extends React.Component {
             split = splitAtBit(getExpandedAddress(address), this.props.cidr);
         } catch (e) {
             // Invalid address
-            address = ipaddr.parse('0::')
+            address = ipaddr.parse('::')
         }
         if (!split) {
             split = [getExpandedAddress(address), ''];
@@ -67,10 +77,13 @@ class ExpandedAddress extends React.Component {
         const content = [];
         for (let index = 0; index < split.length; index++) {
             content.push(<span key={index}>
-                {splits[index-1] && <Indicator><span>/{splits[index-1]}</span></Indicator>}
+                {splits[index - 1] !== undefined && <Indicator className={this.props.flipped ? 'flipped' : ''}>
+                    <span>/{splits[index - 1]}</span>
+                </Indicator>}
                 {split[index]}
             </span>);
         }
+
         return (
             <div>
                 {this.props.descriptor !== false ? "Expanded Address:" : ""}
