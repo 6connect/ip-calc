@@ -1,55 +1,55 @@
 h1 {
-  font-size: 2rem;
+	font-size: 2rem;
 }
 
 .App {
-  text-align: center;
+	text-align: center;
 }
 
 .App-logo {
-  height: 20vmin;
-  pointer-events: none;
+	height: 20vmin;
+	pointer-events: none;
 }
 
 .App-header {
-  background-color: var(--color-bg);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+	background-color: var(--color-bg);
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-size: calc(10px + 2vmin);
+	color: white;
 }
 
 a {
-  color: #61dafb;
-  text-decoration: none;
+	color: #61dafb;
+	text-decoration: none;
 }
 a:hover {
-  text-decoration: underline;
+	text-decoration: underline;
 }
 
 @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
 }
 
 .primary-input {
-  padding: 1rem;
-  margin: 2rem auto 1rem;
-  font-size: 1.5rem;
-  background: var(--color-darker);
-  color: white;
-  border: none;
-  outline: none;
-  border-radius: 0.5rem;
-  box-sizing: border-box;
-  width: 95%;
-  max-width: 600px;
-  text-align: center;
+	padding: 1rem;
+	margin: 2rem auto 1rem;
+	font-size: 1.5rem;
+	background: var(--color-darker);
+	color: white;
+	border: none;
+	outline: none;
+	border-radius: 0.5rem;
+	box-sizing: border-box;
+	width: 95%;
+	max-width: 600px;
+	text-align: center;
 }

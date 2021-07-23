@@ -68,7 +68,6 @@ export function allPossibleAddresses(address, parent_cidr, child_cidr) {
         throw (new Error(`Parent CIDR (${parent_cidr}) cannot be greater than the child CIDR (${child_cidr})`));
     }
 
-
     address = getExpandedAddress(address);
     // how many bits we'll be working with
     const bits = child_cidr - parent_cidr;
@@ -121,7 +120,7 @@ export function exportAndDownload() {
     let start = this.start;
     let end = this.end;
 
-    const fileName = `${ipaddr.parse(address).toString()} ${start}-${end}.csv`;
+    const fileName = `${ipaddr.parse(address).toString().replace(/:/g, '-')}_${start}-${end}.csv`;
     let array = [address];
     if (start !== end) {
         array = allPossibleAddresses(ipaddr.parse(address), start, end);

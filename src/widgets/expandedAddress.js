@@ -35,6 +35,12 @@ const Indicator = styled.div`
             transform: rotate(180deg);
         }
     }
+    .prominent {
+        z-index: 100;
+    }
+    .not-prominent {
+        transform: scale(0.5);
+    }
 `;
 const Rainbow = styled.span`
     & > span {
@@ -76,8 +82,19 @@ class ExpandedAddress extends React.Component {
         }
         const content = [];
         for (let index = 0; index < split.length; index++) {
+            let classes = "";
+
+            if (this.props.flipped) {
+                classes += "flipped";
+            }
+            if (this.props.prominentIndicator && this.props.prominentIndicator === index) { 
+                classes += " prominent";
+            } else if (this.props.prominentIndicator) {
+                classes += " not-prominent";
+            }
+
             content.push(<span key={index}>
-                {splits[index - 1] !== undefined && <Indicator className={this.props.flipped ? 'flipped' : ''}>
+                {splits[index - 1] !== undefined && <Indicator className={classes}>
                     <span>/{splits[index - 1]}</span>
                 </Indicator>}
                 {split[index]}
@@ -87,7 +104,7 @@ class ExpandedAddress extends React.Component {
         return (
             <div>
                 {this.props.descriptor !== false ? "Expanded Address:" : ""}
-                <Code>
+                <Code data-min="true">
                     <Rainbow>{content}</Rainbow>
                 </Code>
             </div>
