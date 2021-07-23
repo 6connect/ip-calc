@@ -72,33 +72,6 @@ const CIDRInput = styled.input`
 	font-weight: bold;
 `;
 
-class Exclusion extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            cidr: '',
-            isCIDR: false,
-            start: 0,
-            end: 0,
-        };
-    }
-    cidrChange(e) {
-        this.setState({
-            [e.target.dataset.target]: e.target.value,
-        });
-    }
-
-    render() {
-        return (
-            <div className="my-2 flex">
-                <CIDRInput data-target="start" onChange={this.cidrChange.bind(this)} type="number" value={this.state.start} />
-                <CIDRInput data-target="end" onChange={this.cidrChange.bind(this)} type="number" value={this.state.end} />
-            </div>
-        );
-    }
-}
-
-let exclusion_index = 0;
 class ExportComponent extends React.Component {
     constructor(props) {
         super(props);
