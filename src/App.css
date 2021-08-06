@@ -56,4 +56,5 @@ a:hover {
 .primary-input[data-size="small"] {
 	padding: 0.5rem;
 	font-size: 1rem;
+	margin: 1rem auto 5px;
 }

@@ -176,8 +176,8 @@ class ExportComponent extends React.Component {
             exclusions.push(
                 <div key={index}>
                     <input type="text" value={element.address} onChange={this.exclusionUpdateAddress.bind(this)} data-index={index} ref={this.inputRef} className="primary-input" data-size="small" placeholder="ip address" autoFocus />
-                    <SubnetWrapper className="mt-8 mb-4">
-                        <ExpandedAddress descriptor={false} address={element.address} cidr={[this.state.start, element.cidr]} prominentIndicator={2} />
+                    <SubnetWrapper className="mt-0 mb-8">
+                        <ExpandedAddress flipped={true} descriptor={false} address={element.address} cidr={[this.state.start, element.cidr]} prominentIndicator={2} />
                         <SubnetInput onChange={this.exclusionUpdate.bind(this)} data-index={index} type="number" value={element.cidr} min={this.state.start + 1} max={this.state.end} />
                     </SubnetWrapper>
                 </div>
