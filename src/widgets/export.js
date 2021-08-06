@@ -160,6 +160,15 @@ class ExportComponent extends React.Component {
         }
     }
 
+    componentDidMount () {
+        // call this.props.close if escape key is pressed
+        window.addEventListener('keydown', e => {
+            if (e.key === 'Escape') {
+                this.props.close();
+            }
+        });
+    }
+
     render() {
         const exclusions = [];
         for (let index = 0; index < this.state.exclusions.length; index++) {
