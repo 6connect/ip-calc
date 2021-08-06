@@ -69,10 +69,6 @@ class App extends React.Component {
 		window.addEventListener('closeExportPopup', this.closeExportPopup.bind(this));
 	}
 
-	closeExportPopup() {
-
-	}
-
 	calculate() {
 		if (this.state.inputValue !== this.inputRef.current.value || firstRender) {
 			firstRender = false;
@@ -127,9 +123,15 @@ class App extends React.Component {
 		});
 	}
 
+
+	closeExportPopup() {
+		this.setState({
+			exportComponent: false,
+		});
+	}
 	activateExport(e) {
 		this.setState({
-			exportComponent: <ExportComponent address={this.state.inputValue} start={parseInt(e.target.dataset.start)} end={parseInt(e.target.dataset.end)} />
+			exportComponent: <ExportComponent address={this.state.inputValue} close={this.closeExportPopup.bind(this)} start={parseInt(e.target.dataset.start)} end={parseInt(e.target.dataset.end)} />
 		});
 	}
 

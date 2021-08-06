@@ -154,6 +154,12 @@ class ExportComponent extends React.Component {
     }
 
 
+    closeIfClicked(e) {
+        if (e && e.target && e.target.classList.contains('close')) {
+            this.props.close();
+        }
+    }
+
     render() {
         const exclusions = [];
         for (let index = 0; index < this.state.exclusions.length; index++) {
@@ -170,7 +176,7 @@ class ExportComponent extends React.Component {
         }
 
         return (
-            <FloatingWrapper>
+            <FloatingWrapper className="close" onClick={this.closeIfClicked.bind(this)}>
                 <ContentWrapper>
                     <Row>
                         <h1>Export</h1>
