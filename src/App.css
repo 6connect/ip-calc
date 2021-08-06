@@ -53,3 +53,7 @@ a:hover {
 	max-width: 600px;
 	text-align: center;
 }
+.primary-input[data-size="small"] {
+	padding: 0.5rem;
+	font-size: 1rem;
+}
