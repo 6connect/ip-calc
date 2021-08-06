@@ -42,6 +42,10 @@ const Button = styled.button`
 	outline: none;
 	color: var(--color-bg);
 	font-weight: bold;
+    &[disabled] {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
 `;
 const CheckboxRow = styled.div`
     width: 100%;
@@ -202,7 +206,7 @@ class ExportComponent extends React.Component {
                         </CheckboxRow> */}
                     </Row>
                     <Row>
-                        <Button>Save</Button>
+                        <Button disabled>Save</Button>
                     </Row>
                 </ContentWrapper>
             </FloatingWrapper>
