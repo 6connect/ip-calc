@@ -153,11 +153,9 @@ class App extends React.Component {
 					</SubnetWrapper>
 					<div>
 						<u>{numberWithCommas(Math.pow(2, subnet - lastCIDR))}</u> <b>/{subnet}</b> subnets in a <b>/{lastCIDR}</b>
-						<Export disabled={(info.end - info.start > 16)} title="Export all possible subnets as CSV" onClick={this.activateExport.bind(this)}
-							data-start={info.start}
-							data-end={info.end}>
-							<FontAwesomeIcon icon={faSave} />
-						</Export>
+						{
+							/*<Export disabled={(info.end - info.start > 16)} title="Export all possible subnets as CSV" onClick={this.activateExport.bind(this)} data-start={info.start} data-end={info.end}> <FontAwesomeIcon icon={faSave} /> </Export>*/
+						}
 					</div>
 				</div>
 			);
