@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 import ExpandedAddress from './widgets/expandedAddress';
 import ExportComponent from './widgets/export';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowDown, faArrowUp, faPlusCircle, faSave } from '@fortawesome/free-solid-svg-icons'
+import { faArrowDown, faArrowUp, faPlusCircle } from '@fortawesome/free-solid-svg-icons'
 import { numberWithCommas } from './utility';
 import { Row, SubnetWrapper, SubnetInput } from './widgets/common';
 
@@ -154,6 +154,7 @@ class App extends React.Component {
 					<div>
 						<u>{numberWithCommas(Math.pow(2, subnet - lastCIDR))}</u> <b>/{subnet}</b> subnets in a <b>/{lastCIDR}</b>
 						{
+							// The exporting feature is not quite ready yet, investigating industry standards for any format that would fit this use case.
 							/*<Export disabled={(info.end - info.start > 16)} title="Export all possible subnets as CSV" onClick={this.activateExport.bind(this)} data-start={info.start} data-end={info.end}> <FontAwesomeIcon icon={faSave} /> </Export>*/
 						}
 					</div>
