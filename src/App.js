@@ -9,25 +9,6 @@ import { faArrowDown, faArrowUp, faPlusCircle } from '@fortawesome/free-solid-sv
 import { numberWithCommas } from './utility';
 import { Row, SubnetWrapper, SubnetInput } from './widgets/common';
 
-
-const Export = styled.div`
-	padding: 0.25em 1em;
-	display: inline-block;
-	cursor: pointer;
-	&:hover {
-		color: var(--color-primary);
-	}
-	&[disabled] {
-		color: var(--color-error);
-		opacity: 0.5;
-		pointer-events: none;
-		cursor: not-allowed;
-	}
-	& > * {
-		pointer-events: none;
-	}
-`;
-
 const AddNewSubnet = styled.div`
     display: inline-block;
     background: rgba(0,0,50,0.25);
@@ -140,11 +121,11 @@ class App extends React.Component {
 		let lastCIDR = this.state.inputCidr;
 		for (let index = 0; index < this.state.subnets.length; index++) {
 			let subnet = this.state.subnets[index];
-			const info = {
+			/*const info = {
 				address: this.state.inputValue,
 				start: lastCIDR,
 				end: subnet,
-			}
+			}*/
 			subnetElements.push(
 				<div className="w-full my-4" key={index}>
 					<SubnetWrapper>
