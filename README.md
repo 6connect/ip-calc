@@ -1,5 +1,7 @@
 # [IPv6 Subnet Calculator](https://ip-calc.6connect.com/)
 
+[Check it out!](https://ip-calc.6connect.com/)
+
 This is a tool to calculate IPv6 subnets. It's similar to [sipcalc](https://github.com/sii/sipcalc), but runs entirely inside the browser and has a graphical user interface.
 
 ## Feedback
