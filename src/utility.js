@@ -63,6 +63,41 @@ export function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
+// converts IPv6 address to a binary string
+export function getBinaryString(address) {
+    // working with a string because JavaScript's Number.MAX_SAFE_INTEGER is too small
+    // decompressing the IPv6 address into a binary string
+    let binaryString = "";
+    for (let index = 0; index < address.length; index++) {
+        const char = address[index];
+        if (char !== ":") {
+            binaryString += withLeadingZeros(parseInt(char, 16).toString(2), 4);
+        }
+    }
+    return binaryString;
+}
+
+//converts a 128 bit binary string to an IPv6 address
+export function getIPv6AddressFromBinary(binaryString) {
+    let address = "";
+    for (let index = 0; index < binaryString.length; index += 16) {
+        const chunk = binaryString.substr(index, 16);
+        address += parseInt(chunk, 2).toString(16) + ":";
+    }
+    return address;
+}
+
+// takes in an IPv6 address and a CIDR, converts the IPv6 address to a binary string
+// sets all digits of the binary string after the CIDR to 0, converts the binary string back to an IPv6 address
+export function zeroAfterBit(address, cidr) {
+    const binaryString = getBinaryString(address);
+    let binaryStringZeroed = binaryString.substr(0, cidr);
+    while (binaryStringZeroed.length < 128) {
+        binaryStringZeroed += "0";
+    }
+    return getIPv6AddressFromBinary(binaryStringZeroed);
+}
+
 export function allPossibleAddresses(address, parent_cidr, child_cidr) {
     if (parent_cidr > child_cidr) {
         throw (new Error(`Parent CIDR (${parent_cidr}) cannot be greater than the child CIDR (${child_cidr})`));
@@ -75,13 +110,7 @@ export function allPossibleAddresses(address, parent_cidr, child_cidr) {
 
     // working with a string because JavaScript's Number.MAX_SAFE_INTEGER is too small
     // decompressing the IPv6 address into a binary string
-    let binaryString = "";
-    for (let index = 0; index < address.length; index++) {
-        const char = address[index];
-        if (char !== ":") {
-            binaryString += withLeadingZeros(parseInt(char, 16).toString(2), 4);
-        }
-    }
+    let binaryString = getBinaryString(address);
 
     const output = new Array(total_number);
     for (let index = 0; index < total_number; index++) {
