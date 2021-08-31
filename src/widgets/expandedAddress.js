@@ -42,6 +42,8 @@ const Indicator = styled.div`
         transform: scale(0.5);
     }
 `;
+
+// contains an expanded IPv6 address, colors arbitrary segments differently
 const Rainbow = styled.span`
     & > span {
         position: relative;
@@ -85,11 +87,14 @@ class ExpandedAddress extends React.Component {
             let classes = "";
 
             if (this.props.flipped) {
+                // display the indicator underneath instead of above
                 classes += "flipped";
             }
             if (this.props.prominentIndicator && this.props.prominentIndicator === index) { 
+                // increase the z-index
                 classes += " prominent";
             } else if (this.props.prominentIndicator) {
+                // decrease the z-index
                 classes += " not-prominent";
             }
 

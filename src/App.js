@@ -121,11 +121,6 @@ class App extends React.Component {
 		let lastCIDR = this.state.inputCidr;
 		for (let index = 0; index < this.state.subnets.length; index++) {
 			let subnet = this.state.subnets[index];
-			/*const info = {
-				address: this.state.inputValue,
-				start: lastCIDR,
-				end: subnet,
-			}*/
 			subnetElements.push(
 				<div className="w-full my-4" key={index}>
 					<SubnetWrapper>
