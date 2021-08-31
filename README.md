@@ -2,6 +2,10 @@
 
 This is a tool to calculate IPv6 subnets. It's similar to [sipcalc](https://github.com/sii/sipcalc), but runs entirely inside the browser and has a graphical user interface.
 
+## Feedback
+
+Comments, questions, or suggestions? Check out the [GitHub Issues page](https://github.com/6connect/ip-calc/issues)
+
 # Development
 
 This is based off of [create-react-app](https://github.com/facebook/create-react-app).
