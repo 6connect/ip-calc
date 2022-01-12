@@ -36,7 +36,7 @@ class App extends React.Component {
 		const params = new URLSearchParams(document.location.search.substring(1));
 
 		this.state = {
-			inputValue: params.get('ip') || '1234::/16',
+			inputValue: params.get('ip') || '2001:DB8::/32',
 			subnets: [],
 			exportPopup: false,
 			exportComponent: false,
