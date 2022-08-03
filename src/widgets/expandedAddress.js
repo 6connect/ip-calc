@@ -63,58 +63,58 @@ const Rainbow = styled.span`
 `;
 
 class ExpandedAddress extends React.Component {
-    render() {
-        let address = '';
-        let split = false;
-        let splits = [];
+	render() {
+		let address = '';
+		let split = false;
+		let splits = [];
 
-        try {
-            address = ipaddr.parse(this.props.address);
-            for (let index = 0; index < this.props.cidr.length; index++) {
-                const element = this.props.cidr[index];
-                splits.push(Number(element));
-            }
-            split = splitAtBit(getExpandedAddress(address), this.props.cidr);
-        } catch (e) {
-            // Invalid address
-            address = ipaddr.parse('::')
-        }
-        if (!split) {
-            split = [getExpandedAddress(address), ''];
-        }
-        const content = [];
-        for (let index = 0; index < split.length; index++) {
-            let classes = "";
+		try {
+			address = ipaddr.parse(this.props.address);
+			for (let index = 0; index < this.props.cidr.length; index++) {
+				const element = this.props.cidr[index];
+				splits.push(Number(element));
+			}
+			split = splitAtBit(getExpandedAddress(address), this.props.cidr);
+		} catch (e) {
+			// Invalid address
+			address = ipaddr.parse('::')
+		}
+		if (!split) {
+			split = [getExpandedAddress(address), ''];
+		}
+		const content = [];
+		for (let index = 0; index < split.length; index++) {
+			let classes = "";
 
-            if (this.props.flipped) {
-                // display the indicator underneath instead of above
-                classes += "flipped";
-            }
-            if (this.props.prominentIndicator && this.props.prominentIndicator === index) { 
-                // increase the z-index
-                classes += " prominent";
-            } else if (this.props.prominentIndicator) {
-                // decrease the z-index
-                classes += " not-prominent";
-            }
+			if (this.props.flipped) {
+				// display the indicator underneath instead of above
+				classes += "flipped";
+			}
+			if (this.props.prominentIndicator && this.props.prominentIndicator === index) {
+				// increase the z-index
+				classes += " prominent";
+			} else if (this.props.prominentIndicator) {
+				// decrease the z-index
+				classes += " not-prominent";
+			}
 
-            content.push(<span key={index}>
-                {splits[index - 1] !== undefined && <Indicator className={classes}>
-                    <span>/{splits[index - 1]}</span>
-                </Indicator>}
-                {split[index]}
-            </span>);
-        }
+			content.push(<span key={index}>
+				{splits[index - 1] !== undefined && <Indicator className={classes}>
+					<span>/{splits[index - 1]}</span>
+				</Indicator>}
+				{split[index]}
+			</span>);
+		}
 
-        return (
-            <div>
-                {this.props.descriptor !== false ? "Expanded Address:" : ""}
-                <Code data-min="true">
-                    <Rainbow>{content}</Rainbow>
-                </Code>
-            </div>
-        );
-    }
+		return (
+			<div>
+				{this.props.descriptor !== false ? "Expanded Address:" : ""}
+				<Code data-min="true">
+					<Rainbow>{content}</Rainbow>
+				</Code>
+			</div>
+		);
+	}
 }
 
 export default ExpandedAddress;

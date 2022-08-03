@@ -13,11 +13,13 @@ Comments, questions, or suggestions? Check out the [GitHub Issues page](https://
 This is based off of [create-react-app](https://github.com/facebook/create-react-app).
 
 Start a development server at `http://localhost:3000/` and watch for changes:
+
 ```shell
 npm run start
 ```
 
 Create a production build in `/build/`:
+
 ```shell
 npm run build
 ```

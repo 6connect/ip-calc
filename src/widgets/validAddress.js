@@ -22,37 +22,37 @@ const Container = styled.div`
 `;
 
 class ValidIPWidget extends React.Component {
-    render() {
-        if (!this.props.mode) {
-            return <></>
-        }
+	render() {
+		if (!this.props.mode) {
+			return <></>
+		}
 
-        let parsed = false;
-        try {
-            parsed = ipaddr.parse(this.props.value);
-        } catch (e) {
-            //Address is invalid or incomplete
-        }
+		let parsed = false;
+		try {
+			parsed = ipaddr.parse(this.props.value);
+		} catch (e) {
+			//Address is invalid or incomplete
+		}
 
-        const mode = this.props.mode.toLowerCase();
-        let valid = false;
-        try {
-            valid = mode === parsed.kind().substr(2);
-        } catch (e) {
-            //Invalid or incomplete address
-        }
-        return (
-            <Container className={valid ? 'valid' : 'invalid'}>
-                {
-                    mode === "v4" ? <span>v4 {
-                        valid ? <FontAwesomeIcon icon={faCheckCircle} /> : <FontAwesomeIcon icon={faTimesCircle} />
-                    }</span> : <span>v6 {
-                        valid ? <FontAwesomeIcon icon={faCheckCircle} /> : <FontAwesomeIcon icon={faTimesCircle} />
-                    }</span>
-                }
-            </Container>
-        );
-    }
+		const mode = this.props.mode.toLowerCase();
+		let valid = false;
+		try {
+			valid = mode === parsed.kind().substr(2);
+		} catch (e) {
+			//Invalid or incomplete address
+		}
+		return (
+			<Container className={valid ? 'valid' : 'invalid'}>
+				{
+					mode === "v4" ? <span>v4 {
+						valid ? <FontAwesomeIcon icon={faCheckCircle} /> : <FontAwesomeIcon icon={faTimesCircle} />
+					}</span> : <span>v6 {
+						valid ? <FontAwesomeIcon icon={faCheckCircle} /> : <FontAwesomeIcon icon={faTimesCircle} />
+					}</span>
+				}
+			</Container>
+		);
+	}
 }
 
 export default ValidIPWidget;
