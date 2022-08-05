@@ -53,9 +53,7 @@ export const SubnetWrapper = styled.div`
 	align-items: center;
 	justify-content: center;
 
-	&[disabled] {
-		cursor: not-allowed;
-	}
+	cursor: default;
 
 	& > div:nth-of-type(1) {
 		display: inline-block;

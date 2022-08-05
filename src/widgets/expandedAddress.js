@@ -12,6 +12,12 @@ const Indicator = styled.div`
     left: 0;
     width: 2.5em;
     margin-left: -1em;
+
+	/*&[data-index="2"] {
+		cursor: grab;
+		cursor: ew-resize;
+	}*/
+
     &::after {
         position: absolute;
         top: 100%;
@@ -99,7 +105,7 @@ class ExpandedAddress extends React.Component {
 			}
 
 			content.push(<span key={index}>
-				{splits[index - 1] !== undefined && <Indicator className={classes}>
+				{splits[index - 1] !== undefined && <Indicator data-index={index} className={classes}>
 					<span>/{splits[index - 1]}</span>
 				</Indicator>}
 				{split[index]}

@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 import ExpandedAddress from './widgets/expandedAddress';
 import ExportComponent from './widgets/export';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowDown, faArrowUp, faPlusCircle } from '@fortawesome/free-solid-svg-icons'
+import { faArrowDown, faPlusCircle } from '@fortawesome/free-solid-svg-icons'
 import { numberWithCommas } from './utility';
 import { Row, SubnetWrapper, SubnetInput } from './widgets/common';
 
@@ -124,7 +124,7 @@ class App extends React.Component {
 			subnetElements.push(
 				<div className="w-full my-4" key={index}>
 					<SubnetWrapper>
-						<ExpandedAddress descriptor={false} address={this.state.inputValue} cidr={[lastCIDR, subnet]} />
+						<ExpandedAddress descriptor={false} address={this.state.inputValue} cidr={[lastCIDR, subnet]} onChange={this.subnetUpdate.bind(this)} />
 						<SubnetInput onChange={this.subnetUpdate.bind(this)} step="4" data-index={index} type="number" value={subnet} min={lastCIDR} max="128" />
 					</SubnetWrapper>
 					<div>
