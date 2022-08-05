@@ -1,32 +1,31 @@
-import './App.css';
-import React from 'react';
-import styled from '@emotion/styled';
+import "./App.css";
+import React from "react";
+import styled from "@emotion/styled";
 
-import ExpandedAddress from './widgets/expandedAddress';
-import ExportComponent from './widgets/export';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowDown, faPlusCircle } from '@fortawesome/free-solid-svg-icons'
-import { numberWithCommas } from './utility';
-import { Row, SubnetWrapper, SubnetInput } from './widgets/common';
+import ExpandedAddress from "./widgets/expandedAddress";
+import ExportComponent from "./widgets/export";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowDown, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+import { numberWithCommas } from "./utility";
+import { Row, SubnetWrapper, SubnetInput } from "./widgets/common";
 
 const AddNewSubnet = styled.div`
-    display: inline-block;
-    background: rgba(0,0,50,0.25);
-    border-radius: 1rem;
-    font-size: 1rem;
-    padding: 0.25rem 1rem;
-    margin: 0.25rem;
-    border: 0.2rem solid transparent;
+	display: inline-block;
+	background: rgba(0, 0, 50, 0.25);
+	border-radius: 1rem;
+	font-size: 1rem;
+	padding: 0.25rem 1rem;
+	margin: 0.25rem;
+	border: 0.2rem solid transparent;
 
-	cursor:pointer;
-    &:hover {
-        border-color: #9BC53D;
-        svg {
-            color: #9BC53D;
-        }
-    }
+	cursor: pointer;
+	&:hover {
+		border-color: #9bc53d;
+		svg {
+			color: #9bc53d;
+		}
+	}
 `;
-
 
 let firstRender = true;
 
@@ -36,42 +35,42 @@ class App extends React.Component {
 		const params = new URLSearchParams(document.location.search.substring(1));
 
 		this.state = {
-			inputValue: params.get('ip') || '2001:DB8::/32',
+			inputValue: params.get("ip") || "2001:DB8::/32",
 			subnets: [],
 			exportPopup: false,
 			exportComponent: false,
-		}
+		};
 		this.inputRef = React.createRef();
 	}
 
 	componentDidMount() {
-		this.inputRef.current.addEventListener('keyup', this.calculate.bind(this))
+		this.inputRef.current.addEventListener("keyup", this.calculate.bind(this));
 		this.calculate();
-		window.addEventListener('closeExportPopup', this.closeExportPopup.bind(this));
+		window.addEventListener("closeExportPopup", this.closeExportPopup.bind(this));
 	}
 
 	calculate() {
 		if (this.state.inputValue !== this.inputRef.current.value || firstRender) {
 			firstRender = false;
-			const value = this.inputRef.current.value.split('/');
+			const value = this.inputRef.current.value.split("/");
 			let cidr = undefined;
 			if (value.length > 1 && parseInt(value[1]) > 0) {
 				cidr = parseInt(value[1]);
 			}
 			this.setState({
 				inputValue: value[0],
-				inputCidr: typeof cidr === 'number' ? cidr : 0,
-			})
+				inputCidr: typeof cidr === "number" ? cidr : 0,
+			});
 		}
 	}
 
 	addSubnet() {
 		if (!this.state.inputCidr) {
 			let defaultCIDR = 0;
-			this.inputRef.current.value = this.state.inputValue + "/" + defaultCIDR
+			this.inputRef.current.value = this.state.inputValue + "/" + defaultCIDR;
 			this.setState({
 				inputCidr: defaultCIDR,
-			})
+			});
 		}
 
 		let cidr = this.state.inputCidr ? this.state.inputCidr : 60;
@@ -104,7 +103,6 @@ class App extends React.Component {
 		});
 	}
 
-
 	closeExportPopup() {
 		this.setState({
 			exportComponent: false,
@@ -112,7 +110,7 @@ class App extends React.Component {
 	}
 	activateExport(e) {
 		this.setState({
-			exportComponent: <ExportComponent address={this.state.inputValue} close={this.closeExportPopup.bind(this)} start={parseInt(e.target.dataset.start)} end={parseInt(e.target.dataset.end)} />
+			exportComponent: <ExportComponent address={this.state.inputValue} close={this.closeExportPopup.bind(this)} start={parseInt(e.target.dataset.start)} end={parseInt(e.target.dataset.end)} />,
 		});
 	}
 
@@ -152,11 +150,18 @@ class App extends React.Component {
 						</small>
 					</Row>
 					<Row disabled={this.state.exportComponent !== false}>
-						<h1>IPv6 Subnet Calculator</h1>
+						<div>
+							<h1>IPv6 Subnet Calculator</h1>
+							<p>
+								<a href="https://www.6connect.com/resources/announcing-our-new-ipv6-subnet-calculator/">About this project</a>
+							</p>
+						</div>
 					</Row>
 					<Row disabled={this.state.exportComponent !== false}>
 						<input type="text" defaultValue={this.state.inputValue} ref={this.inputRef} disabled={this.state.exportComponent !== false} className="primary-input" placeholder="ip address" autoFocus />
-						<div className="text-right w-full pr-8">CIDR <FontAwesomeIcon icon={faArrowDown} /></div>
+						<div className="text-right w-full pr-8">
+							CIDR <FontAwesomeIcon icon={faArrowDown} />
+						</div>
 						<SubnetWrapper disabled>
 							<ExpandedAddress descriptor={false} address={this.state.inputValue} cidr={[0, this.state.inputCidr]} />
 							<SubnetInput step="4" type="number" defaultValue={this.state.inputCidr} disabled title="Adjust this CIDR using the input above" />
@@ -165,7 +170,9 @@ class App extends React.Component {
 					<Row disabled={this.state.exportComponent !== false}>
 						{subnetElements}
 						<span onClick={this.addSubnet.bind(this)}>
-							<AddNewSubnet>Add Subnet <FontAwesomeIcon icon={faPlusCircle} /></AddNewSubnet>
+							<AddNewSubnet>
+								Add Subnet <FontAwesomeIcon icon={faPlusCircle} />
+							</AddNewSubnet>
 						</span>
 					</Row>
 				</header>
