@@ -152,8 +152,9 @@ class App extends React.Component {
 					<Row disabled={this.state.exportComponent !== false}>
 						<div>
 							<h1>IPv6 Subnet Calculator</h1>
+							<p>A utility used to calculate IPv6 subnets, nested subnets, and more!</p>
 							<p>
-								<a href="https://www.6connect.com/resources/announcing-our-new-ipv6-subnet-calculator/">About this project</a>
+								<a href="https://www.6connect.com/resources/announcing-our-new-ipv6-subnet-calculator/">Read More</a>
 							</p>
 						</div>
 					</Row>
