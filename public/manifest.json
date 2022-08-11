@@ -1,6 +1,6 @@
 {
-	"short_name": "Subnet Calculator",
-	"name": "A web based IPv6 subnet calculator.",
+	"short_name": "IPv6 Calc",
+	"name": "IPv6 subnet calculator.",
 	"icons": [
 		{
 			"src": "favicon.ico",
